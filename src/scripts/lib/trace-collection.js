@@ -1,4 +1,10 @@
+const loadData = require('./load-data');
+
 class TraceCollection {
+
+	static loadData() {
+		return loadData();
+	}
 
 	constructor(records) {
 		this.items = records.map(record => new TraceItem(record));
@@ -35,11 +41,21 @@ class TraceCollection {
 	}
 
 	findDependencies(name) {
-		return Object.keys(this.dependencies[name]);
+		if (name && this.dependencies[name]) {
+			return Object.keys(this.dependencies[name]);
+		}
+		else {
+			return [];
+		}
 	}
 
 	findDependents(name) {
-		return Object.keys(this.dependents[name]);
+		if (name && this.dependents[name]) {
+			return Object.keys(this.dependents[name]);
+		}
+		else {
+			return [];
+		}
 	}
 
 }

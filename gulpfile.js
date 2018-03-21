@@ -35,9 +35,9 @@ gulp.task('serve', ['watch'], (cb) => {
 	}, cb);
 });
 
-gulp.task('watch:all', ['watch:views', 'watch:scripts']);
+gulp.task('watch:all', ['watch:views', 'watch:pages', 'watch:scripts']);
 
-gulp.task('build:all', ['build:views', 'build:scripts']);
+gulp.task('build:all', ['build:views', 'build:pages', 'build:scripts']);
 
 
 // VIEWS
@@ -56,6 +56,18 @@ gulp.task('build:views', [], () => {
 
 gulp.task('watch:views', ['build:views'], () => {
 	gulp.watch(['views/**/*.+(hbs|js)'], ['build:views']);
+});
+
+
+// PAGES
+
+gulp.task('build:pages', [], () => {
+	return gulp.src('src/*.html')
+		.pipe(gulp.dest('dist'));
+});
+
+gulp.task('watch:pages', ['build:pages'], () => {
+	gulp.watch('src/*.html', ['build:pages']);
 });
 
 

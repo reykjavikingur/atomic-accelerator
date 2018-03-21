@@ -1,10 +1,9 @@
+const renderList = collection => `
+<ul>${collection.names.map(renderItemLink).join('')}</ul>
+`;
 
-function renderList(collection) {
-	return [
-		'<ul>',
-		collection.names.map(name => '<li>' + name + '</li>').join(''),
-		'</ul>',
-	].join('');
-}
+const renderItemLink = (name) => `
+<li><a href="?name=${name}">${name}</a></li>
+`;
 
 module.exports = renderList;

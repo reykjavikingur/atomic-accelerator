@@ -8,6 +8,7 @@ const browserify = require('browserify');
 const sourcemaps = require('gulp-sourcemaps');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
+const sass = require('gulp-sass');
 
 const writeFile = Promise.denodeify(fs.writeFile);
 
@@ -35,9 +36,34 @@ gulp.task('serve', ['watch'], (cb) => {
 	}, cb);
 });
 
-gulp.task('watch:all', ['watch:views', 'watch:pages', 'watch:scripts']);
+var types = ['styles', 'views', 'pages', 'scripts'];
 
-gulp.task('build:all', ['build:views', 'build:pages', 'build:scripts']);
+gulp.task('watch:all', types.map(type => 'watch:' + type));
+
+gulp.task('build:all', types.map(type => 'build:' + type));
+
+
+// STYLES
+
+gulp.task('build:styles', [], () => {
+	return gulp.src('src/styles/**/*.scss')
+		.pipe(sourcemaps.init())
+		.pipe(sass({
+			outputStyle: 'expanded'
+		}).on('error', handleError))
+		.pipe(sourcemaps.write('.'))
+		.pipe(gulp.dest('dist/styles'))
+		;
+
+	function handleError(err) {
+		sass.logError.call(this, err);
+		this.emit('end');
+	}
+});
+
+gulp.task('watch:styles', ['build:styles'], () => {
+	gulp.watch('src/styles/**/*.scss', ['build:styles']);
+});
 
 
 // VIEWS

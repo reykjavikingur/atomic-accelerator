@@ -1,10 +1,10 @@
 const renderName = (data) => `
 <a href="trace.html">back</a>
-<h2>${data.name}</h2>
+<h2>name: <em>${data.name}</em></h2>
 <h3>dependencies</h3>
-${data.dependencies.map(renderItemLink).join('')}
+<ul>${data.dependencies.map(renderItemLink).join('')}</ul>
 <h3>dependents</h3>
-${data.dependents.map(renderItemLink).join('')}
+<ul>${data.dependents.map(renderItemLink).join('')}</ul>
 <h3>outputs</h3>
 ${data.items.map(renderItem).join('')}
 `;
@@ -14,8 +14,13 @@ const renderItemLink = (name) => `
 `;
 
 const renderItem = (item) => `
-<div>
+${renderItemHeader(item)}
 ${item.output}
+`;
+
+const renderItemHeader = (item) => `
+<div class="trace__item">
+	occurrence in <a href="?name=${item.parent}">${item.parent}</a>
 </div>
 `;
 

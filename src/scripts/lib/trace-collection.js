@@ -3,7 +3,11 @@ const loadData = require('./load-data');
 class TraceCollection {
 
 	static loadData() {
-		return loadData();
+		return loadData()
+			.then(r => {
+				return new TraceCollection(r);
+			})
+			;
 	}
 
 	constructor(records) {

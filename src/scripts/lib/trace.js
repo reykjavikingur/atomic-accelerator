@@ -6,9 +6,8 @@ const renderName = require('./render-name');
 function trace() {
 	var el = document.querySelector('.trace');
 	TraceCollection.loadData()
-		.then(r => {
+		.then(collection => {
 			try {
-				var collection = new TraceCollection(r);
 				el.innerHTML = render(collection);
 			}
 			catch (e) {

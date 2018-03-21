@@ -1,12 +1,25 @@
 const Promise = require('promise');
+const TraceCollection = require('./trace-collection');
+const renderList = require('./render-list');
 
 function trace() {
 	console.log('running trace function');
 	console.log('loading data');
+	var el = document.querySelector('.trace');
 	loadData()
 		.then(r => {
 			console.log('loaded data', r);
+			try {
+				var collection = new TraceCollection(r);
+				el.innerHTML = renderList(collection);
+			}
+			catch (e) {
+				console.error('unable to render list', e);
+			}
+		}, e => {
+			console.error('unable to load data', e);
 		})
+	;
 }
 
 function loadData() {

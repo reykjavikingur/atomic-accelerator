@@ -1,9 +1,17 @@
-const renderList = collection => `
-<ul>${collection.names.map(renderItemLink).join('')}</ul>
+const ejs = require('ejs');
+
+const template = `
+<ul>
+<% for (let name of names) { %>
+	<li><a href="?name=<%= name %>"><%= name %></a></li>
+<% } %>
+</ul>
 `;
 
-const renderItemLink = (name) => `
-<li><a href="?name=${name}">${name}</a></li>
-`;
+function renderList(collection) {
+	return ejs.render(template, {
+		names: collection.names
+	});
+}
 
 module.exports = renderList;

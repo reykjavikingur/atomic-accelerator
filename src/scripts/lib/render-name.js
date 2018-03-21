@@ -1,27 +1,46 @@
-const renderName = (data) => `
+const ejs = require('ejs');
+
+const template = `
 <a href="trace.html">back</a>
-<h2>name: <em>${data.name}</em></h2>
+
+<h2>name: <em><%= name %></em></h2>
+
 <h3>dependencies</h3>
-<ul>${data.dependencies.map(renderItemLink).join('')}</ul>
+<ul class="trace__graph">
+<% if (dependencies.length > 0) { %>
+	<% for (let name of dependencies) { %>
+		<li><a href="?name=<%= name %>"><%= name %></a></li>
+	<% } %>
+<% } else { %>
+	<em>none</em>
+<% } %>
+</ul>
+
 <h3>dependents</h3>
-<ul>${data.dependents.map(renderItemLink).join('')}</ul>
-<h3>outputs</h3>
-${data.items.map(renderItem).join('')}
+<ul class="trace__graph">
+<% if (dependents.length > 0) { %>
+	<% for (let name of dependents) { %>
+		<li><a href="?name=<%= name %>"><%= name %></a></li>
+	<% } %>
+<% } else { %>
+	<em>none</em>
+<% } %>
+</ul>
+
+<% for (let item of items) { %>
+	<div class="trace__item">
+		<% if (item.parent) { %>
+			occurrence in <a href="?name=<%= item.parent %>"><%= item.parent %></a>
+		<% } else { %>
+			occurrence on <a href="/<%= name %>.html">page</a>
+		<% } %>
+	</div>
+	<%- item.output %>
+<% } %>
 `;
 
-const renderItemLink = (name) => `
-<li><a href="?name=${name}">${name}</a></li>
-`;
-
-const renderItem = (item) => `
-${renderItemHeader(item)}
-${item.output}
-`;
-
-const renderItemHeader = (item) => `
-<div class="trace__item">
-	occurrence in <a href="?name=${item.parent}">${item.parent}</a>
-</div>
-`;
+function renderName(data) {
+	return ejs.render(template, data);
+}
 
 module.exports = renderName;

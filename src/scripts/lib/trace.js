@@ -8,7 +8,7 @@ function trace() {
 	TraceCollection.loadData()
 		.then(collection => {
 			try {
-				el.innerHTML = render(collection);
+				render(el, collection);
 			}
 			catch (e) {
 				console.error('unable to render', e);
@@ -19,12 +19,12 @@ function trace() {
 	;
 }
 
-function render(collection) {
+function render(el, collection) {
 	var url = URL.parse(location.href, true);
 	var query = url.query;
 	var name = query.name;
 	if (name) {
-		return renderName({
+		renderName(el, {
 			name: name,
 			items: collection.findItems(name),
 			dependencies: collection.findDependencies(name),
@@ -32,7 +32,7 @@ function render(collection) {
 		});
 	}
 	else {
-		return renderList(collection);
+		renderList(el, collection);
 	}
 }
 

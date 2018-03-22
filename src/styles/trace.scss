@@ -18,4 +18,18 @@
         background-color: #ccffcc;
         margin: 1em auto;
     }
+    
+    .trace__source {
+        background-color: white;
+        color: black;
+        font-family: monospace;
+        padding: 1em;
+    }
+    
+    .trace__source {
+        display: none;
+    }
+    .source-button:focus + .trace__source, .trace__source:hover {
+        display: block;
+    }
 }

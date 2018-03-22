@@ -34,13 +34,17 @@ const template = `
 		<% } else { %>
 			occurrence on <a href="/<%= name %>.html">page</a>
 		<% } %>
+		<button class="source-button">source</button>
+		<div class="trace__source"><textarea><%= item.output %></textarea></div>
 	</div>
 	<%- item.output %>
 <% } %>
+
+<div class="trace__source-modal"></div>
 `;
 
-function renderName(data) {
-	return ejs.render(template, data);
+function renderName(el, data) {
+	el.innerHTML = ejs.render(template, data);
 }
 
 module.exports = renderName;

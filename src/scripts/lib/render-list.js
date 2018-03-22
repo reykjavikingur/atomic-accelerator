@@ -8,8 +8,8 @@ const template = `
 </ul>
 `;
 
-function renderList(collection) {
-	return ejs.render(template, {
+function renderList(el, collection) {
+	el.innerHTML = ejs.render(template, {
 		names: collection.names
 	});
 }

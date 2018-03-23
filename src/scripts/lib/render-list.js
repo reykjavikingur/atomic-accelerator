@@ -2,15 +2,18 @@ const ejs = require('ejs');
 
 const template = `
 <ul>
-<% for (let name of names) { %>
-	<li><a href="?name=<%= name %>"><%= name %></a></li>
+<% for (let name in nameMap) { %>
+	<li>
+		<a href="?name=<%= name %>"><%= name %></a>
+		(<%= nameMap[name].length %>)
+	</li>
 <% } %>
 </ul>
 `;
 
 function renderList(el, collection) {
 	el.innerHTML = ejs.render(template, {
-		names: collection.names
+		nameMap: collection.groupItemsByName()
 	});
 }
 

@@ -13,6 +13,7 @@ class TraceCollection {
 	constructor(records) {
 		this.items = records.map(record => new TraceItem(record));
 		this.nameMap = {};
+		this.parentMap = {};
 		this.dependencies = {};
 		this.dependents = {};
 		for (let item of this.items) {
@@ -22,16 +23,27 @@ class TraceCollection {
 			}
 			this.nameMap[item.name].push(item);
 
+			if (!this.parentMap[item.parent]) {
+				this.parentMap[item.parent] = [];
+			}
+			this.parentMap[item.parent].push(item);
+
 			if (item.parent) {
-				if (item.parent && !this.dependencies[item.parent]) {
+				if (!this.dependencies[item.parent]) {
 					this.dependencies[item.parent] = {};
 				}
-				this.dependencies[item.parent][item.name] = true;
+				if (!this.dependencies[item.parent][item.name]) {
+					this.dependencies[item.parent][item.name] = 0;
+				}
+				this.dependencies[item.parent][item.name]++;
 
 				if (!this.dependents[item.name]) {
 					this.dependents[item.name] = {};
 				}
-				this.dependents[item.name][item.parent] = true;
+				if (!this.dependents[item.name][item.parent]) {
+					this.dependents[item.name][item.parent] = 0;
+				}
+				this.dependents[item.name][item.parent]++;
 			}
 		}
 	}
@@ -40,8 +52,22 @@ class TraceCollection {
 		return Object.keys(this.nameMap);
 	}
 
-	findItems(name) {
+	// TODO dereference return values to protect against external mutations
+
+	filterByName(name) {
 		return this.nameMap[name];
+	}
+
+	filterByParent(parent) {
+		return this.parentMap[parent];
+	}
+
+	groupItemsByName() {
+		return this.nameMap;
+	}
+
+	groupItemsByParent() {
+		return this.parentMap;
 	}
 
 	findDependencies(name) {
@@ -70,7 +96,7 @@ class TraceItem {
 		this.id = record.id;
 		this.name = record.name;
 		this.output = record.output;
-		this.parent = record.parent;
+		this.parent = record.parent || '';
 	}
 
 }

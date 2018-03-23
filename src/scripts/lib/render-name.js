@@ -1,7 +1,7 @@
 const ejs = require('ejs');
 
 const template = `
-<a href="trace.html">back</a>
+<a href="trace.html">full list</a>
 
 <h2>name: <em><%= name %></em></h2>
 
@@ -43,7 +43,15 @@ const template = `
 <div class="trace__source-modal"></div>
 `;
 
-function renderName(el, data) {
+function renderName(el, name, collection) {
+
+	var data = {
+		name: name,
+		items: collection.filterByName(name),
+		dependencies: collection.findDependencies(name),
+		dependents: collection.findDependents(name)
+	};
+
 	el.innerHTML = ejs.render(template, data);
 }
 

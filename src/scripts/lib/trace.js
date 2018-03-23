@@ -24,12 +24,7 @@ function render(el, collection) {
 	var query = url.query;
 	var name = query.name;
 	if (name) {
-		renderName(el, {
-			name: name,
-			items: collection.findItems(name),
-			dependencies: collection.findDependencies(name),
-			dependents: collection.findDependents(name)
-		});
+		renderName(el, name, collection);
 	}
 	else {
 		renderList(el, collection);

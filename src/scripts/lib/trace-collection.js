@@ -12,94 +12,24 @@ class TraceCollection {
 
 	constructor(records) {
 		this.items = records.map(record => new TraceItem(record));
-		this.nameMap = {};
-		this.parentMap = {};
-		this.dependencies = {};
-		this.dependents = {};
-		for (let item of this.items) {
-
-			if (!this.nameMap[item.name]) {
-				this.nameMap[item.name] = [];
-			}
-			this.nameMap[item.name].push(item);
-
-			if (!this.parentMap[item.parent]) {
-				this.parentMap[item.parent] = [];
-			}
-			this.parentMap[item.parent].push(item);
-
-			if (item.parent) {
-				if (!this.dependencies[item.parent]) {
-					this.dependencies[item.parent] = {};
-				}
-				if (!this.dependencies[item.parent][item.name]) {
-					this.dependencies[item.parent][item.name] = 0;
-				}
-				this.dependencies[item.parent][item.name]++;
-
-				if (!this.dependents[item.name]) {
-					this.dependents[item.name] = {};
-				}
-				if (!this.dependents[item.name][item.parent]) {
-					this.dependents[item.name][item.parent] = 0;
-				}
-				this.dependents[item.name][item.parent]++;
-			}
-		}
 	}
-
-	get names() {
-		return Object.keys(this.nameMap);
-	}
-
-	// TODO dereference return values to protect against external mutations
 
 	filterByName(name) {
-		return this.nameMap[name];
+		return this.items.filter(item => item.name === name);
 	}
 
 	groupItemsByName() {
-		return this.nameMap;
+		return groupBy(this.items, 'name');
 	}
 
-	groupItemsByParent() {
-		return this.parentMap;
-	}
-
-	/**
-	 * Creates map of items with given parent grouped by name.
-	 * @param parent {String}
-	 * @returns {Object}
-	 */
 	findDependencies(parent) {
-		var map = {};
-		for (let item of this.items) {
-			if (item.parent === parent) {
-				if (!map[item.name]) {
-					map[item.name] = [];
-				}
-				map[item.name].push(item);
-			}
-		}
-		return map;
+		var dependencies = this.items.filter(item => item.parent === parent);
+		return groupBy(dependencies, 'name');
 	}
 
-	/**
-	 * Creates map of items with given name grouped by parent.
-	 * @param child {String}
-	 * @returns {Object}
-	 */
 	findDependents(child) {
-		var map = {};
-		for (let item of this.items) {
-			if (item.name === child && Boolean(item.parent)) {
-				if (!map[item.parent]) {
-					map[item.parent] = [];
-				}
-				map[item.parent].push(item);
-			}
-		}
-		return map;
+		var dependents = this.items.filter(item => item.name === child && Boolean(item.parent));
+		return groupBy(dependents, 'parent');
 	}
 
 }
@@ -113,6 +43,17 @@ class TraceItem {
 		this.parent = record.parent || '';
 	}
 
+}
+
+function groupBy(list, prop) {
+	var map = {};
+	for (let item of list) {
+		if (!map[item[prop]]) {
+			map[item[prop]] = [];
+		}
+		map[item[prop]].push(item);
+	}
+	return map;
 }
 
 module.exports = TraceCollection;

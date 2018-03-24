@@ -7,9 +7,12 @@ const template = `
 
 <h3>dependencies</h3>
 <ul class="trace__graph">
-<% if (dependencies.length > 0) { %>
-	<% for (let name of dependencies) { %>
-		<li><a href="?name=<%= name %>"><%= name %></a></li>
+<% if (Object.keys(dependencies).length > 0) { %>
+	<% for (let name in dependencies) { %>
+		<li>
+			<a href="?name=<%= name %>"><%= name %></a>
+			(<%= dependencies[name].length %>)
+		</li>
 	<% } %>
 <% } else { %>
 	<em>none</em>

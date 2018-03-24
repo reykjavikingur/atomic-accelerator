@@ -58,10 +58,6 @@ class TraceCollection {
 		return this.nameMap[name];
 	}
 
-	filterByParent(parent) {
-		return this.parentMap[parent];
-	}
-
 	groupItemsByName() {
 		return this.nameMap;
 	}
@@ -70,13 +66,22 @@ class TraceCollection {
 		return this.parentMap;
 	}
 
-	findDependencies(name) {
-		if (name && this.dependencies[name]) {
-			return Object.keys(this.dependencies[name]);
+	/**
+	 * Creates map of items with given parent grouped by name.
+	 * @param parent {String}
+	 * @returns {Object}
+	 */
+	findDependencies(parent) {
+		var map = {};
+		for (let item of this.items) {
+			if (item.parent === parent) {
+				if (!map[item.name]) {
+					map[item.name] = [];
+				}
+				map[item.name].push(item);
+			}
 		}
-		else {
-			return [];
-		}
+		return map;
 	}
 
 	findDependents(name) {

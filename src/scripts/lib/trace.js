@@ -21,6 +21,7 @@ function trace() {
 function render(el, collection) {
 	var url = URL.parse(location.href, true);
 	var query = url.query;
+	viewEngine.query = query;
 	var data = {
 		query: query,
 		collection: collection,

@@ -1,32 +1,24 @@
 const ejs = require('ejs');
-const list = require('./views/list');
-const search = require('./views/search');
-const type = require('./views/type');
 
 class ViewEngine {
 
-	static create() {
-		var instance = new ViewEngine();
-		instance.register('list', list);
-		instance.register('type', type);
-		instance.register('search', search);
-		return instance;
-	}
-
-	constructor() {
+	constructor(views) {
 		this.registration = {};
-	}
-
-	register(name, template) {
-		this.registration[name] = ejs.compile(template);
+		for (let key in views) {
+			var template = views[key];
+			this.registration[key] = ejs.compile(template, {context: this});
+		}
 	}
 
 	render(name, data) {
-		data = Object.assign(data, {
-			render: this.render.bind(this)
-		});
 		return this.registration[name](data);
 	}
 }
 
-module.exports = ViewEngine.create();
+module.exports = new ViewEngine({
+	'top': require('./views/top'),
+	'search-form': require('./views/search-form'),
+	'list': require('./views/list'),
+	'search': require('./views/search'),
+	'type': require('./views/type'),
+});

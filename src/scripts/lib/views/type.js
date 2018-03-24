@@ -1,5 +1,6 @@
 module.exports = `
-<a href="trace.html">full list</a>
+<!-- type.js -->
+<%- this.render('search-form') %>
 
 <%
 var items = collection.filterByName(query.name);

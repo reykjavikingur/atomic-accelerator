@@ -1,8 +1,6 @@
 const URL = require('url');
 const TraceCollection = require('./trace-collection');
-const renderList = require('./render-list');
-const renderName = require('./render-name');
-const renderSearch = require('./render-search');
+const viewEngine = require('./view-engine');
 
 function trace() {
 	var el = document.querySelector('.trace');
@@ -23,14 +21,22 @@ function trace() {
 function render(el, collection) {
 	var url = URL.parse(location.href, true);
 	var query = url.query;
+	var data = {
+		query: query,
+		collection: collection,
+	};
+	el.innerHTML = viewEngine.render(route(query), data);
+}
+
+function route(query) {
 	if (query.hasOwnProperty('name')) {
-		renderName(el, query.name, collection);
+		return 'type';
 	}
 	else if (query.hasOwnProperty('q')) {
-		renderSearch(el, query.q, collection);
+		return 'search';
 	}
 	else {
-		renderList(el, collection);
+		return 'list';
 	}
 }
 

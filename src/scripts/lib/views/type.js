@@ -1,9 +1,13 @@
-const ejs = require('ejs');
-
-const template = `
+module.exports = `
 <a href="trace.html">full list</a>
 
-<h2>name: <em><%= name %></em></h2>
+<%
+var items = collection.filterByName(query.name);
+var dependencies = collection.findDependencies(query.name);
+var dependents = collection.findDependents(query.name);
+%>
+
+<h2>name: <em><%= query.name %></em></h2>
 
 <h3>dependencies</h3>
 <ul class="trace__graph">
@@ -48,17 +52,3 @@ const template = `
 
 <div class="trace__source-modal"></div>
 `;
-
-function renderName(el, name, collection) {
-
-	var data = {
-		name: name,
-		items: collection.filterByName(name),
-		dependencies: collection.findDependencies(name),
-		dependents: collection.findDependents(name)
-	};
-
-	el.innerHTML = ejs.render(template, data);
-}
-
-module.exports = renderName;

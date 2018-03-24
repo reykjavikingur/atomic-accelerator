@@ -84,13 +84,22 @@ class TraceCollection {
 		return map;
 	}
 
-	findDependents(name) {
-		if (name && this.dependents[name]) {
-			return Object.keys(this.dependents[name]);
+	/**
+	 * Creates map of items with given name grouped by parent.
+	 * @param child {String}
+	 * @returns {Object}
+	 */
+	findDependents(child) {
+		var map = {};
+		for (let item of this.items) {
+			if (item.name === child && Boolean(item.parent)) {
+				if (!map[item.parent]) {
+					map[item.parent] = [];
+				}
+				map[item.parent].push(item);
+			}
 		}
-		else {
-			return [];
-		}
+		return map;
 	}
 
 }

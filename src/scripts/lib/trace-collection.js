@@ -32,6 +32,27 @@ class TraceCollection {
 		return groupBy(dependents, 'parent');
 	}
 
+	search(query) {
+
+		var results = this.items
+				.map(item => createResult(item, query))
+				.filter(result => result.match > 0)
+			;
+
+		var items = results
+			.sort((a, b) => b.match - a.match)
+			.map(result => result.item);
+
+		return items;
+
+		function createResult(item, query) {
+			return {
+				item: item,
+				match: item.match(query)
+			};
+		}
+	}
+
 }
 
 class TraceItem {
@@ -41,6 +62,18 @@ class TraceItem {
 		this.name = record.name;
 		this.output = record.output;
 		this.parent = record.parent || '';
+	}
+
+	match(search) {
+		if (this.name.indexOf(search) >= 0) {
+			return 1;
+		}
+		else if (this.output.indexOf(search) >= 0) {
+			return 0.5;
+		}
+		else {
+			return 0;
+		}
 	}
 
 }

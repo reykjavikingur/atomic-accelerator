@@ -14,17 +14,17 @@ class TraceCollection {
 		this.items = records.map(record => new TraceItem(record));
 
 		var levels = {};
-		// initialize all levels to 0
+		// initialize all levels to 0 (atom)
 		for (let item of this.items) {
 			levels[item.name] = 0;
 		}
-		// set levels to 1 where applicable
+		// set levels to 1 (molecule) where applicable
 		for (let item of this.items) {
 			if (item.parent) {
 				levels[item.parent] = 1;
 			}
 		}
-		// set levels to 2 where applicable
+		// set levels to 2 (organism) where applicable
 		for (let item of this.items) {
 			if (levels[item.name] > 0) {
 				if (item.parent) {
@@ -32,11 +32,25 @@ class TraceCollection {
 				}
 			}
 		}
+		// set levels to 3 (page) where applicable
+		for (let item of this.items) {
+			if (!item.parent) {
+				levels[item.name] = 3;
+			}
+		}
 		this.levels = levels;
 	}
 
 	filterByName(name) {
 		return this.items.filter(item => item.name === name);
+	}
+
+	filterByLevel(level) {
+		return this.items.filter(item => this.levels[item.name] === level);
+	}
+
+	groupLevelByName(level) {
+		return groupBy(this.filterByLevel(level), 'name');
 	}
 
 	groupItemsByName() {

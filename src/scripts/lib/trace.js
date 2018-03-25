@@ -22,11 +22,14 @@ function render(el, collection) {
 	var url = URL.parse(location.href, true);
 	var query = url.query;
 	viewEngine.query = query;
-	var data = {
-		query: query,
-		collection: collection,
-	};
-	el.innerHTML = viewEngine.render(route(query), data);
+	viewEngine.collection = collection;
+	try {
+		el.innerHTML = viewEngine.render(route(query));
+	}
+	catch (e) {
+		console.error('unable to render view', e);
+		el.innerHTML = '<div>Error</div>';
+	}
 }
 
 function route(query) {

@@ -12,6 +12,27 @@ class TraceCollection {
 
 	constructor(records) {
 		this.items = records.map(record => new TraceItem(record));
+
+		var levels = {};
+		// initialize all levels to 0
+		for (let item of this.items) {
+			levels[item.name] = 0;
+		}
+		// set levels to 1 where applicable
+		for (let item of this.items) {
+			if (item.parent) {
+				levels[item.parent] = 1;
+			}
+		}
+		// set levels to 2 where applicable
+		for (let item of this.items) {
+			if (levels[item.name] > 0) {
+				if (item.parent) {
+					levels[item.parent] = 2;
+				}
+			}
+		}
+		this.levels = levels;
 	}
 
 	filterByName(name) {
@@ -30,6 +51,10 @@ class TraceCollection {
 	findDependents(child) {
 		var dependents = this.items.filter(item => item.name === child && Boolean(item.parent));
 		return groupBy(dependents, 'parent');
+	}
+
+	getLevel(name) {
+		return this.levels[name];
 	}
 
 	search(query) {

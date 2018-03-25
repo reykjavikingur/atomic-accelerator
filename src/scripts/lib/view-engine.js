@@ -6,6 +6,7 @@ const views = {
 	'list-page': require('./views/list-page'),
 	'search-page': require('./views/search-page'),
 	'name-page': require('./views/name-page'),
+	'item': require('./views/item'),
 };
 
 class ViewEngine {

@@ -3,10 +3,6 @@ module.exports = `
 <%- this.render('search-form') %>
 <% var items = this.collection.search(this.url.query.q); %>
 <% for (let item of items) { %>
-	<div class="trace__item">
-		<%= item.name %>
-	</div>
-	<%- item.output %>
-	<!-- TODO reuse code between this and render-name  -->
+	<%- this.render('item', {item:item}) %>
 <% } %>
 `;

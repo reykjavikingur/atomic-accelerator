@@ -31,13 +31,13 @@ function render(el, collection) {
 
 function route(query) {
 	if (query.hasOwnProperty('name')) {
-		return 'type';
+		return 'name-page';
 	}
 	else if (query.hasOwnProperty('q')) {
-		return 'search';
+		return 'search-page';
 	}
 	else {
-		return 'list';
+		return 'list-page';
 	}
 }
 

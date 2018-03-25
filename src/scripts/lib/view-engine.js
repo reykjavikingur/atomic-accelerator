@@ -16,9 +16,8 @@ class ViewEngine {
 }
 
 module.exports = new ViewEngine({
-	'top': require('./views/top'),
 	'search-form': require('./views/search-form'),
-	'list': require('./views/list'),
-	'search': require('./views/search'),
-	'type': require('./views/type'),
+	'list-page': require('./views/list-page'),
+	'search-page': require('./views/search-page'),
+	'name-page': require('./views/name-page'),
 });

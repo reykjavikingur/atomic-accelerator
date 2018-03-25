@@ -2,13 +2,15 @@ module.exports = `
 <!-- type.js -->
 <%- this.render('search-form') %>
 
+<% var name = this.url.query.name %>
+
 <%
-var items = this.collection.filterByName(this.query.name);
-var dependencies = this.collection.findDependencies(this.query.name);
-var dependents = this.collection.findDependents(this.query.name);
+var items = this.collection.filterByName(name);
+var dependencies = this.collection.findDependencies(name);
+var dependents = this.collection.findDependents(name);
 %>
 
-<h2>name: <em><%= this.query.name %></em></h2>
+<h2>name: <em><%= name %></em></h2>
 
 <h3>dependencies</h3>
 <ul class="trace__graph">

@@ -14,6 +14,14 @@
         }
     }
     
+    .trace__link {
+        font-weight: normal;
+    }
+    
+    .trace__link--page {
+        font-weight: bold;
+    }
+    
     .trace__item {
         background-color: #ccffcc;
         margin: 1em auto;

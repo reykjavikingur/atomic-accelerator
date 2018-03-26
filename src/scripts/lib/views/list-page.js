@@ -12,7 +12,7 @@ var nameMap = this.collection.groupItemsByName();
 	<ul>
 		<% for (let name in nameMap) { %>
 			<li>
-				<a href="?name=<%= name %>"><%= name %></a>
+				<%- this.render('link', {name: name}) %>
 				(<%= nameMap[name].length %>)
 			</li>
 		<% } %>

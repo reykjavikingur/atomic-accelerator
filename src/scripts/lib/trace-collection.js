@@ -71,6 +71,10 @@ class TraceCollection {
 		return this.levels[name];
 	}
 
+	getCount(name) {
+		return this.filterByName(name).length;
+	}
+
 	search(query) {
 
 		var results = this.items

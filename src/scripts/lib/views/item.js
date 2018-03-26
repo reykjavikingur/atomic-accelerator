@@ -1,10 +1,9 @@
 module.exports = `
 <div class="trace__item">
-	<a href="?name=<%= item.name %>"><%= item.name %></a>
+	<%- this.render('link', {name: item.name}) %>
 	<% if (item.parent) { %>
-		as appearing in <a href="?name=<%= item.parent %>"><%= item.parent %></a>
-	<% } else { %>
-		(<a href="/<%= item.name %>.html">page</a>)
+		as appearing in 
+		<%- this.render('link', {name: item.parent}) %>
 	<% } %>
 	<button class="source-button">source</button>
 	<div class="trace__source"><textarea><%= item.output %></textarea></div>

@@ -11,15 +11,12 @@ var dependents = this.collection.findDependents(name);
 %>
 
 <h2>
-	name:
-	<em>
-		<%= name %>
-		<% if (level === 3) { %>
-			(<a target="_blank" href="/<%= name %>.html">page</a>)
-		<% } else { %>
-			(<%= levelNames[level] %>)
-		<% } %>
-	</em>
+	name: <em><%= name %></em>
+	<% if (level === 3) { %>
+		(<a target="_blank" href="/<%= name %>.html">page</a>)
+	<% } else { %>
+		(<%= levelNames[level] %>)
+	<% } %>
 </h2>
 
 <ul class="trace__graph">

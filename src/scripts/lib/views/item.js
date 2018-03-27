@@ -6,7 +6,9 @@ module.exports = `
 		<%- this.render('link', {name: item.parent}) %>
 	<% } %>
 	<button class="source-button">source</button>
-	<div class="trace__source"><textarea><%= item.output %></textarea></div>
+	<div class="trace__source">
+		<textarea readonly onclick="this.focus(); this.select(); "><%= item.output %></textarea>
+	</div>
 </div>
 <%- item.output %>
 `;

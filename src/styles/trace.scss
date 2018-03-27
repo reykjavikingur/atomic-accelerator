@@ -28,10 +28,17 @@
     }
     
     .trace__source {
-        background-color: white;
-        color: black;
-        font-family: monospace;
         padding: 1em;
+        
+        code {
+            background-color: white;
+            color: black;
+            font-family: monospace;
+        }
+        textarea {
+            height: 6em;
+            width: 100%;
+        }
     }
     
     .trace__source {

@@ -27,13 +27,13 @@ gulp.task('watch', [], (cb) => {
 });
 
 gulp.task('serve', ['watch'], (cb) => {
-	// TODO automatically open on trace.html
 	var bs = browserSync.create();
 	bs.init({
 		files: 'dist/**/*',
 		server: {
 			baseDir: 'dist'
-		}
+		},
+		startPath: '/trace.html'
 	}, cb);
 });
 

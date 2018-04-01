@@ -1,10 +1,13 @@
 const gulp = require('gulp');
+const path = require('path');
+const glob = require('glob');
 const rimraf = require('rimraf');
 const runSequence = require('run-sequence');
 const browserSync = require('browser-sync');
 const fs = require('fs');
 const Promise = require('promise');
 const browserify = require('browserify');
+const es = require('event-stream');
 const sourcemaps = require('gulp-sourcemaps');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
@@ -99,20 +102,30 @@ gulp.task('watch:pages', ['build:pages'], () => {
 
 // SCRIPTS
 
-gulp.task('build:scripts', [], () => {
-	// TODO compile main.js and trace.js separately
-	return browserify('src/scripts/main.js', {
-		debug: true
-	})
-		.transform('babelify') // uses .babelrc
-		.bundle()
-		.on('error', handleError)
-		.pipe(source('main.js'))
-		.pipe(buffer())
-		.pipe(sourcemaps.init({loadMaps: true}))
-		.pipe(sourcemaps.write('.'))
-		.pipe(gulp.dest('dist/scripts'))
-		;
+gulp.task('build:scripts', [], (cb) => {
+	glob('src/scripts/*.js', (err, files) => {
+		if (err) {
+			return cb(err);
+		}
+		var streams = files.map(createScript);
+		es.merge(streams).on('end', cb);
+	});
+
+	function createScript(entry) {
+		var basename = path.basename(entry);
+		return browserify(entry, {
+			debug: true
+		})
+			.transform('babelify') // uses .babelrc
+			.bundle()
+			.on('error', handleError)
+			.pipe(source(basename))
+			.pipe(buffer())
+			.pipe(sourcemaps.init({loadMaps: true}))
+			.pipe(sourcemaps.write('.'))
+			.pipe(gulp.dest('dist/scripts'))
+			;
+	}
 
 	function handleError(err) {
 		console.error(err.toString());

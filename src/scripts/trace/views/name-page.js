@@ -19,6 +19,8 @@ var dependents = this.collection.findDependents(name);
 	<% } %>
 </h2>
 
+<!-- TODO show template source -->
+
 <ul class="trace__graph">
 <h3>appears in:</h3>
 <% if (Object.keys(dependents).length > 0) { %>

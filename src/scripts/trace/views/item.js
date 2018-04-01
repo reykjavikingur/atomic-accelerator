@@ -5,6 +5,7 @@ module.exports = `
 		as appearing in 
 		<%- this.render('link', {name: item.parent}) %>
 	<% } %>
+	<!-- TODO open source in modal -->
 	<button class="source-button">source</button>
 	<div class="trace__source">
 		<textarea readonly onclick="this.focus(); this.select(); "><%= item.output %></textarea>

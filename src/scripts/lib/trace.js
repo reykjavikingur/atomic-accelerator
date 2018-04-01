@@ -1,9 +1,11 @@
+// TODO put all trace code into "src/scripts/trace" directory
 const TraceCollection = require('./trace-collection');
 const ViewEngine = require('./view-engine');
 
+// TODO run the code instead of exporting to the container
 function trace() {
 	var el = document.querySelector('.trace');
-	TraceCollection.loadData()
+	TraceCollection.loadData('/trace-data.json')
 		.then(collection => {
 			render(el, collection);
 		}, e => {

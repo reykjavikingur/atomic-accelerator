@@ -27,6 +27,7 @@ gulp.task('watch', [], (cb) => {
 });
 
 gulp.task('serve', ['watch'], (cb) => {
+	// TODO automatically open on trace.html
 	var bs = browserSync.create();
 	bs.init({
 		files: 'dist/**/*',
@@ -74,8 +75,7 @@ gulp.task('build:views', [], () => {
 		trace: true,
 	})
 		.then(r => {
-			return writeFile('dist/traces.json', JSON.stringify(HandlebarsGenerator.tracer.traces), 'utf8');
-
+			return writeFile('dist/trace-data.json', JSON.stringify(HandlebarsGenerator.tracer.traces), 'utf8');
 		})
 		;
 });
@@ -100,6 +100,7 @@ gulp.task('watch:pages', ['build:pages'], () => {
 // SCRIPTS
 
 gulp.task('build:scripts', [], () => {
+	// TODO compile main.js and trace.js separately
 	return browserify('src/scripts/main.js', {
 		debug: true
 	})

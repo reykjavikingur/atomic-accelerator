@@ -1,9 +1,9 @@
 const Promise = require('promise');
 
-function loadData() {
+function getJSON(url) {
 	return new Promise((resolve, reject) => {
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', '/traces.json');
+		xhr.open('GET', url);
 		xhr.onload = function () {
 			try {
 				resolve(JSON.parse(xhr.response));
@@ -19,4 +19,4 @@ function loadData() {
 	});
 }
 
-module.exports = loadData;
+module.exports = getJSON;

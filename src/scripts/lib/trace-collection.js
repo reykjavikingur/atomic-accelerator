@@ -1,9 +1,9 @@
-const loadData = require('./load-data');
+const getJSON = require('./get-json');
 
 class TraceCollection {
 
-	static loadData() {
-		return loadData()
+	static loadData(url) {
+		return getJSON(url)
 			.then(r => {
 				return new TraceCollection(r);
 			})

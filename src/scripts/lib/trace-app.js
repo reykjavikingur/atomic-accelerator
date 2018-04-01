@@ -3,7 +3,7 @@ const TraceCollection = require('./trace-collection');
 const ViewEngine = require('./view-engine');
 
 // TODO run the code instead of exporting to the container
-function trace() {
+function traceApp() {
 	var el = document.querySelector('.trace');
 	TraceCollection.loadData('/trace-data.json')
 		.then(collection => {
@@ -26,4 +26,4 @@ function render(el, collection) {
 	}
 }
 
-module.exports = trace;
+module.exports = traceApp;

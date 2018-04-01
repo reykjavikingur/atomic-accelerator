@@ -1,3 +1,1 @@
-window.main = {
-	trace: require('./lib/trace'),
-};
+console.log('starting main script');

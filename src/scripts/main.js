@@ -1,1 +1,3 @@
-console.log('starting main script');
+const app = require('./lib/app');
+
+app();

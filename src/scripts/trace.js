@@ -1,3 +1,6 @@
-const traceApp = require('./lib/trace-app');
+const traceApp = require('./trace/trace-app');
 
-traceApp();
+traceApp({
+	selector: '.trace',
+	dataUrl: '/trace-data.json',
+});

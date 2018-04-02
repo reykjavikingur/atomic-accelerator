@@ -12,11 +12,9 @@ const sourcemaps = require('gulp-sourcemaps');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const sass = require('gulp-sass');
-
+const HandlebarsGenerator = require('handlebars-generator');
 const writeFile = Promise.denodeify(fs.writeFile);
 
-// TODO use published handlebars-generator
-const HandlebarsGenerator = require('/Users/astrader/ProjectCode/node/handlebars-generator');
 
 gulp.task('clean', [], (cb) => {
 	rimraf('dist/**/*', cb);

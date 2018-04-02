@@ -15,6 +15,7 @@ const sass = require('gulp-sass');
 
 const writeFile = Promise.denodeify(fs.writeFile);
 
+// TODO use published handlebars-generator
 const HandlebarsGenerator = require('/Users/astrader/ProjectCode/node/handlebars-generator');
 
 gulp.task('clean', [], (cb) => {

@@ -6,7 +6,8 @@ module.exports = `
 		<%- this.render('link', {name: item.parent}) %>
 	<% } %>
 	<!-- TODO open source in modal -->
-	<button class="source-button">source</button>
+	<label class="source-label" for="source-checkbox-<%= item.id %>">source</label>
+	<input type="checkbox" class="source-checkbox" id="source-checkbox-<%= item.id %>" />
 	<div class="trace__source">
 		<textarea readonly onclick="this.focus(); this.select(); "><%= item.output %></textarea>
 	</div>

@@ -25,26 +25,41 @@
     .trace__item {
         background-color: #ccffcc;
         margin: 1em auto;
+        padding: 0.5em;
     }
     
-    .trace__source {
-        padding: 1em;
-        
-        code {
-            background-color: white;
-            color: black;
-            font-family: monospace;
-        }
-        textarea {
-            height: 6em;
-            width: 100%;
-        }
+    .source-label {
+        background: #ffffff;
+        border: #000000 1px solid;
+        border-radius: 0.25em;
+        color: #000000;
+        display: inline-block;
+        margin: 0.2em 1em;
+        padding: 0.1em 0.3em;
+        user-select: none;
     }
     
-    .trace__source {
+    .source-checkbox {
         display: none;
     }
-    .source-button:focus + .trace__source, .trace__source:hover {
+    
+    .trace__source {
+        textarea {
+            height: 6em;
+            margin: 1em;
+            width: calc(100% - 2em);
+        }
+    }
+    
+    .trace__source {
+        height: 0;
+        overflow: hidden;
+        transition: height 0.3s;
+    }
+    
+    .source-checkbox:checked + .trace__source,
+    .trace__source:hover {
         display: block;
+        height: 6em;
     }
 }

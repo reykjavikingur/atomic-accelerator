@@ -8,8 +8,20 @@
     "build": "gulp build",
     "start": "gulp serve"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reykjavikingur/atomic-accelerator.git"
+  },
+  "keywords": [
+    "atomic design",
+    "prototype",
+    "starter kit",
+    "accelerator",
+    "handlebars",
+    "sass",
+    "browser-sync"
+  ],
+  "author": "Andrew Strader",
   "license": "ISC",
   "dependencies": {
     "babel-core": "^6.26.0",

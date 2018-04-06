@@ -8,6 +8,7 @@ const views = {
 	'name-page': require('./views/name-page'),
 	'item': require('./views/item'),
 	'link': require('./views/link'),
+	'modal-layer': require('./views/modal-layer'),
 	'title': require('./views/title'),
 };
 

@@ -1,5 +1,6 @@
 const TraceCollection = require('./trace-collection');
 const ViewEngine = require('./view-engine');
+window.Modal = require('./modal');
 
 function traceApp(options) {
 	var el = document.querySelector(options.selector);

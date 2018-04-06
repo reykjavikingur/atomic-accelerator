@@ -63,34 +63,17 @@ Trace Styles
         user-select: none;
     }
     
-    .source-checkbox {
+    .trace__source {
         display: none;
     }
     
-    .trace__source {
-        textarea {
-            height: 6em;
-            margin: 1em;
-            width: calc(100% - 2em);
-        }
-    }
-    
-    .trace__source {
-        height: 0;
-        overflow: hidden;
-        transition: height 0.3s;
-    }
-    
-    .source-checkbox:checked + .trace__source,
-    .trace__source:hover {
-        display: block;
-        height: 6em;
-    }
 }
 
 .trace__modal {
     background-color: rgba(127, 127, 127, 0.5);
     display: none;
+    font-family: monospace;
+    overflow: hidden;
     position: fixed;
     top: 0;
     right: 0;
@@ -104,9 +87,12 @@ Trace Styles
     .trace__modal__content {
         background-color: #fff;
         color: #000;
+        max-height: 30em;
+        overflow: auto;
         padding: 40px;
         position: absolute;
-        left: 200px;
-        top: 100px;
+        left: 10vw;
+        right: 10vw;
+        top: 10vh;
     }
 }

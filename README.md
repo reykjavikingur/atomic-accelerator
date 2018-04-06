@@ -32,3 +32,22 @@ the starting point of the automatically generated documentation.
 ## Step 4: Code
 
 Add and edit files and see changes live-reload.
+
+## Create a component
+
+Create an "hbs" file under `views`.
+
+## Create a page
+
+Create a "js" file under `views` with the same base name as an "hbs" file.
+
+## Create a stylesheet
+
+Create an "scss" file under `src/styles` that begins with "_" and import it in `src/styles/main.scss`.
+
+## TODO
+
+* further separate trace code by making `trace` sibling directory of `src`
+* create gulp commands to create component or page
+* add seeded pseudo-random data functions
+* add more components

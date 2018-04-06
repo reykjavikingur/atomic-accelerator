@@ -57,5 +57,9 @@ var dependents = this.collection.findDependents(name);
 	<%- this.render('item', {item:item}) %>
 <% } %>
 
-<div class="trace__source-modal"></div>
+<div class="trace__modal">
+	<div class="trace__modal__content">
+		asdf
+	</div>
+</div>
 `;

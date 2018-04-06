@@ -1,6 +1,6 @@
 const traceApp = require('./trace/trace-app');
 
 traceApp({
-	selector: '.trace',
+	selector: 'body',
 	dataUrl: '/trace-data.json',
 });

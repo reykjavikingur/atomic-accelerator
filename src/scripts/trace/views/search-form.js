@@ -1,6 +1,6 @@
 module.exports = `
-<!-- search-form.js -->
-<form method="get" action="<%= this.url.pathname %>">
+<!-- search form -->
+<form class="trace__search" method="get" action="<%= this.url.pathname %>">
     <input type="text" name="q" value="<%= this.url.query.q %>" />
     <input type="submit" value="Search" />
     <% if (Object.keys(this.url.query).length > 0) { %>

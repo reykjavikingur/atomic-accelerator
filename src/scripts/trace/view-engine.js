@@ -8,6 +8,7 @@ const views = {
 	'name-page': require('./views/name-page'),
 	'item': require('./views/item'),
 	'link': require('./views/link'),
+	'title': require('./views/title'),
 };
 
 class ViewEngine {

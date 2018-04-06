@@ -1,5 +1,7 @@
 module.exports = `
-<!-- list.js -->
+<!-- list page -->
+<%- this.render('title') %>
+<div class="trace__meta">
 <%- this.render('search-form') %>
 <%
 var levels = [3, 2, 1, 0];
@@ -18,4 +20,5 @@ var nameMap = this.collection.groupItemsByName();
 		<% } %>
 	</ul>
 <% } %>
+</div>
 `;

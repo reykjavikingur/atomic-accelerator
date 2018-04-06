@@ -1,5 +1,7 @@
 module.exports = `
-<!-- type.js -->
+<!-- name page -->
+<%- this.render('title') %>
+<div class="trace__meta">
 <%- this.render('search-form') %>
 <%
 var name = this.url.query.name;
@@ -48,6 +50,8 @@ var dependents = this.collection.findDependents(name);
 	<em>none</em>
 <% } %>
 </ul>
+
+</div>
 
 <% for (let item of items) { %>
 	<%- this.render('item', {item:item}) %>

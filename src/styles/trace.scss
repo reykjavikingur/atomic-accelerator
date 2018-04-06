@@ -1,65 +1,89 @@
 .trace {
     
-    ul.trace__graph {
-        li {
-            display: inline-block;
-            &::after {
-                content: ",";
-            }
-            &:last-child {
+    .trace__title, .trace__meta, .trace__item {
+        background-color: #000;
+        color: #fff;
+        font-family: 'Lucida Grande';
+        margin: 0;
+        padding: 10px 20px;
+        
+        a {
+            color: #ff9;
+        }
+    }
+    
+    .trace__title {
+        background-color: #111;
+    }
+    
+    .trace__meta {
+        background-color: #444;
+        
+        .trace__search {
+            margin: 1em auto;
+        }
+    
+        ul.trace__graph {
+            li {
+                display: inline-block;
                 &::after {
-                    content: "";
+                    content: ",";
+                }
+                &:last-child {
+                    &::after {
+                        content: "";
+                    }
                 }
             }
         }
-    }
     
-    .trace__link {
-        font-weight: normal;
-    }
+        .trace__link {
+            font-weight: normal;
+        }
     
-    .trace__link--page {
-        font-weight: bold;
+        .trace__link--page {
+            font-weight: bold;
+        }
+    
     }
     
     .trace__item {
-        background-color: #ccffcc;
-        margin: 1em auto;
-        padding: 0.5em;
-    }
+        background-color: #333;
+        
+        .source-label {
+            background: #ffffff;
+            border: #000000 1px solid;
+            border-radius: 0.25em;
+            color: #000000;
+            display: inline-block;
+            margin: 0.2em 1em;
+            padding: 0.1em 0.3em;
+            user-select: none;
+        }
     
-    .source-label {
-        background: #ffffff;
-        border: #000000 1px solid;
-        border-radius: 0.25em;
-        color: #000000;
-        display: inline-block;
-        margin: 0.2em 1em;
-        padding: 0.1em 0.3em;
-        user-select: none;
-    }
+        .source-checkbox {
+            display: none;
+        }
     
-    .source-checkbox {
-        display: none;
-    }
+        .trace__source {
+            textarea {
+                height: 6em;
+                margin: 1em;
+                width: calc(100% - 2em);
+            }
+        }
     
-    .trace__source {
-        textarea {
+        .trace__source {
+            height: 0;
+            overflow: hidden;
+            transition: height 0.3s;
+        }
+    
+        .source-checkbox:checked + .trace__source,
+        .trace__source:hover {
+            display: block;
             height: 6em;
-            margin: 1em;
-            width: calc(100% - 2em);
         }
     }
     
-    .trace__source {
-        height: 0;
-        overflow: hidden;
-        transition: height 0.3s;
-    }
-    
-    .source-checkbox:checked + .trace__source,
-    .trace__source:hover {
-        display: block;
-        height: 6em;
-    }
 }

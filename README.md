@@ -47,7 +47,6 @@ Create an "scss" file under `src/styles` that begins with "_" and import it in `
 
 ## TODO
 
-* further separate trace code by making `trace` sibling directory of `src`
-* create gulp commands to create component or page
 * add seeded pseudo-random data functions
 * add more components
+* create gulp commands to create component or page

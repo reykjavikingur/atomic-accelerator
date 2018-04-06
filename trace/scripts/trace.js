@@ -1,4 +1,4 @@
-const traceApp = require('./trace/trace-app');
+const traceApp = require('./lib/trace-app');
 
 traceApp({
 	selector: 'body',

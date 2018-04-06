@@ -48,8 +48,10 @@ gulp.task('build:all', types.map(type => 'build:' + type));
 
 // STYLES
 
+var styles = ['src', 'trace'].map(src => src + '/styles/**/*.scss');
+
 gulp.task('build:styles', [], () => {
-	return gulp.src('src/styles/**/*.scss')
+	return gulp.src(styles)
 		.pipe(sourcemaps.init())
 		.pipe(sass({
 			outputStyle: 'expanded'
@@ -65,7 +67,7 @@ gulp.task('build:styles', [], () => {
 });
 
 gulp.task('watch:styles', ['build:styles'], () => {
-	gulp.watch('src/styles/**/*.scss', ['build:styles']);
+	gulp.watch(styles, ['build:styles']);
 });
 
 
@@ -89,20 +91,25 @@ gulp.task('watch:views', ['build:views'], () => {
 
 // PAGES
 
+var pages = ['src', 'trace'].map(src => src + '/*.html');
+
 gulp.task('build:pages', [], () => {
-	return gulp.src('src/*.html')
+	return gulp.src(pages)
 		.pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch:pages', ['build:pages'], () => {
-	gulp.watch('src/*.html', ['build:pages']);
+	gulp.watch(pages, ['build:pages']);
 });
 
 
 // SCRIPTS
 
+var entries = '+(src|trace)/scripts/*.js';
+var scripts = ['src', 'trace'].map(src => src + '/scripts/**/*.js');
+
 gulp.task('build:scripts', [], (cb) => {
-	glob('src/scripts/*.js', (err, files) => {
+	glob(entries, (err, files) => {
 		if (err) {
 			return cb(err);
 		}
@@ -133,5 +140,5 @@ gulp.task('build:scripts', [], (cb) => {
 });
 
 gulp.task('watch:scripts', ['build:scripts'], () => {
-	gulp.watch('src/scripts/**/*.js', ['build:scripts']);
+	gulp.watch(scripts, ['build:scripts']);
 });

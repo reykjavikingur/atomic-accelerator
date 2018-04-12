@@ -9,7 +9,25 @@
 
 {{>header}}
 
-<p>prototype code here</p>
+<p>{{randomParagraph}}</p>
+
+<img src="{{randomImage 800 200}}"/>
+
+<h2>Features</h2>
+
+<ul class="cards">
+    <li>{{>par/feature-card}}</li>
+    <li>{{>par/feature-card}}</li>
+    <li>{{>par/feature-card}}</li>
+</ul>
+
+<h2>Promos</h2>
+
+<ul class="cards">
+    <li>{{randomSentence}}</li>
+    <li>{{randomSentence}}</li>
+    <li>{{randomSentence}}</li>
+</ul>
 
 {{>footer}}
 

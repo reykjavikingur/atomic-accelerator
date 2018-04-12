@@ -82,6 +82,7 @@ gulp.task('build:views', [], () => {
 			return writeFile('dist/trace-data.json', JSON.stringify(HandlebarsGenerator.tracer.traces), 'utf8');
 		})
 		;
+	// TODO be able to handle js and hbs errors appropriately
 });
 
 gulp.task('watch:views', ['build:views'], () => {

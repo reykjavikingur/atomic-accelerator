@@ -1,0 +1,12 @@
+ul.cards {
+    display: flex;
+    
+    li {
+        list-style: none;
+        padding: 1em;
+        
+        img {
+            display: block;
+        }
+    }
+}

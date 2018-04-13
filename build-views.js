@@ -13,7 +13,7 @@ HandlebarsGenerator.generateSite('views', 'dist', {
 	.then(r => {
 		process.exit(0);
 	}, e => {
-		console.error(e.message);
+		console.error(e);
 		process.exit(1);
 	})
 ;

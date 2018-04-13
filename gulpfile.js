@@ -80,7 +80,7 @@ gulp.task('build:views', [], (cb) => {
 });
 
 gulp.task('watch:views', ['build:views'], () => {
-	gulp.watch(['views/**/*.+(hbs|js)'], ['build:views']);
+	gulp.watch(['views/**/*.+(hbs|js)', 'helpers/*.js'], ['build:views']);
 });
 
 

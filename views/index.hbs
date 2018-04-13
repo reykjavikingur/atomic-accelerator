@@ -9,24 +9,26 @@
 
 {{>header}}
 
-<p>{{random.paragraph}}</p>
+{{#repeat 2}}
+    <p>{{random.paragraph}}</p>
+{{/repeat}}
 
 <img src="{{random.image 800 200}}"/>
 
 <h2>{{random.title}}</h2>
 
 <ul class="cards">
-    <li>{{>par/feature-card}}</li>
-    <li>{{>par/feature-card}}</li>
-    <li>{{>par/feature-card}}</li>
+    {{#repeat 3}}
+        <li>{{>par/feature-card}}</li>
+    {{/repeat}}
 </ul>
 
 <h2>{{random.title}}</h2>
 
 <ul class="cards">
-    <li>{{random.sentence}}</li>
-    <li>{{random.sentence}}</li>
-    <li>{{random.sentence}}</li>
+    {{#repeat 3}}
+        <li>{{random.sentence}}</li>
+    {{/repeat}}
 </ul>
 
 {{>footer}}

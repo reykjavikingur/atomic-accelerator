@@ -1,5 +1,5 @@
 {
-  "name": "handlebars-generator-atk",
+  "name": "atomic-accelerator",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -37,6 +37,7 @@
     "gulp-sourcemaps": "^2.6.4",
     "handlebars-generator": "^3.2.1",
     "promise": "^8.0.1",
+    "require-dir": "^1.0.0",
     "rimraf": "^2.6.2",
     "run-sequence": "^2.2.1",
     "vinyl-buffer": "^1.0.1",

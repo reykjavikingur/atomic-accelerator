@@ -47,6 +47,5 @@ Create an "scss" file under `src/styles` that begins with "_" and import it in `
 
 ## TODO
 
-* add seeded pseudo-random data functions
 * create more pages
 * add more components

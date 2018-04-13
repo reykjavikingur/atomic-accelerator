@@ -9,11 +9,11 @@
 
 {{>header}}
 
-<p>{{randomParagraph}}</p>
+<p>{{random.paragraph}}</p>
 
-<img src="{{randomImage 800 200}}"/>
+<img src="{{random.image 800 200}}"/>
 
-<h2>Features</h2>
+<h2>{{random.title}}</h2>
 
 <ul class="cards">
     <li>{{>par/feature-card}}</li>
@@ -24,9 +24,9 @@
 <h2>Promos</h2>
 
 <ul class="cards">
-    <li>{{randomSentence}}</li>
-    <li>{{randomSentence}}</li>
-    <li>{{randomSentence}}</li>
+    <li>{{random.sentence}}</li>
+    <li>{{random.sentence}}</li>
+    <li>{{random.sentence}}</li>
 </ul>
 
 {{>footer}}

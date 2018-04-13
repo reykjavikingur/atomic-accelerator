@@ -4,16 +4,13 @@ const glob = require('glob');
 const rimraf = require('rimraf');
 const runSequence = require('run-sequence');
 const browserSync = require('browser-sync');
-const fs = require('fs');
-const Promise = require('promise');
 const browserify = require('browserify');
 const es = require('event-stream');
 const sourcemaps = require('gulp-sourcemaps');
 const source = require('vinyl-source-stream');
 const buffer = require('vinyl-buffer');
 const sass = require('gulp-sass');
-const HandlebarsGenerator = require('handlebars-generator');
-const writeFile = Promise.denodeify(fs.writeFile);
+const {execFile} = require('child_process');
 
 
 gulp.task('clean', [], (cb) => {
@@ -73,17 +70,13 @@ gulp.task('watch:styles', ['build:styles'], () => {
 
 // VIEWS
 
-gulp.task('build:views', [], () => {
-	return HandlebarsGenerator.generateSite('views', 'dist', {
-		sourceExtension: 'hbs',
-		trace: true,
-	})
-		.then(r => {
-			return writeFile('dist/trace-data.json', JSON.stringify(HandlebarsGenerator.tracer.traces), 'utf8');
-		})
-		;
-	// TODO move handlebars generator to separate process
-	// TODO be able to handle js and hbs errors appropriately
+gulp.task('build:views', [], (cb) => {
+	return execFile('node', ['build-views'], (error, stdout, stderr) => {
+		if (error) {
+			console.error(error.message);
+		}
+		cb();
+	});
 });
 
 gulp.task('watch:views', ['build:views'], () => {

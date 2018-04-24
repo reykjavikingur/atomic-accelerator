@@ -4,7 +4,7 @@ const pkg = require('../package.json');
 
 const r = Randomizer.create(pkg.name);
 
-const randomImageCategory = r.choices([
+const randomImageCategory = r.choice([
 	//'animals',
 	//'arch',
 	'nature',
@@ -12,7 +12,7 @@ const randomImageCategory = r.choices([
 	//'tech',
 ]);
 
-const randomImageId = r.integers(0, 1e9);
+const randomImageId = r.integer(0, 1e9);
 
 const randomImage = function (width, height) {
 	width = parseInt(width) || 640;
@@ -23,10 +23,10 @@ const randomImage = function (width, height) {
 };
 
 const random = {
-	sentence: r.sentences(),
-	paragraph: r.paragraphs(),
-	phrase: r.calls(ucfirst, r.phrases(r.integers(4, 6))),
-	title: r.calls(ucfirstAll, r.phrases(r.integers(2, 5))),
+	sentence: r.sentence(),
+	paragraph: r.paragraph(),
+	phrase: r.phrase(r.integer(4, 6)).transform(ucfirst),
+	title: r.phrase(r.integer(2, 5)).transform(ucfirstAll),
 	image: randomImage,
 };
 

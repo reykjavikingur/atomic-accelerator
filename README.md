@@ -48,4 +48,5 @@ Create an "scss" file under `src/styles` that begins with "_" and import it in `
 ## TODO
 
 * create more pages
+* create page with smattering of most common elements
 * add more components

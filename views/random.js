@@ -4,31 +4,36 @@ const pkg = require('../package.json');
 
 const r = Randomizer.create(pkg.name);
 
-const randomImageCategory = r.choice([
+const IMAGE_CATEGORIES = [
 	//'animals',
 	//'arch',
 	'nature',
 	//'people',
 	//'tech',
-]);
+];
 
-const randomImageId = r.integer(0, 1e9);
+exports.slogan = r.phrase(r.integer(4, 6)).transform(ucfirst);
 
-const randomImage = function (width, height) {
-	width = parseInt(width) || 640;
-	height = parseInt(height) || 480;
-	var id = randomImageId();
-	var cat = randomImageCategory();
-	return `https://placeimg.com/${width}/${height}/${cat}?id=${id}`;
+exports.title = r.phrase(r.integer(2, 5)).transform(ucfirstAll);
+
+exports.sentence = r.sentence();
+
+exports.paragraph = r.paragraph();
+
+exports.id = r.integer(1, 1e9);
+
+exports.imageCategory = r.choice(IMAGE_CATEGORIES);
+
+exports.imageUrl = (width, height) => {
+	return r.object({
+		id: exports.id,
+		cat: exports.imageCategory,
+	}).transform(x => `https://placeimg.com/${width}/${height}/${x.cat}?id=${x.id}`);
 };
 
-const random = {
-	sentence: r.sentence(),
-	paragraph: r.paragraph(),
-	phrase: r.phrase(r.integer(4, 6)).transform(ucfirst),
-	title: r.phrase(r.integer(2, 5)).transform(ucfirstAll),
-	image: randomImage,
-};
+exports.bannerImageUrl = exports.imageUrl(800, 200);
+
+exports.featureImageUrl = exports.imageUrl(320, 240);
 
 function ucfirst(string) {
 	if (string.length > 0) {
@@ -40,5 +45,3 @@ function ucfirst(string) {
 function ucfirstAll(string) {
 	return string.split(/ /).map(ucfirst).join(' ');
 }
-
-module.exports = random;

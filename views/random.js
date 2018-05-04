@@ -12,36 +12,18 @@ const IMAGE_CATEGORIES = [
 	//'tech',
 ];
 
-exports.slogan = r.phrase(r.integer(4, 6)).transform(ucfirst);
-
-exports.title = r.phrase(r.integer(2, 5)).transform(ucfirstAll);
+exports.phrase = (min, max) => {
+	return r.phrase(r.integer(min, max)).generator();
+};
 
 exports.sentence = r.sentence();
 
 exports.paragraph = r.paragraph();
 
-exports.id = r.integer(1, 1e9);
-
-exports.imageCategory = r.choice(IMAGE_CATEGORIES);
-
 exports.imageUrl = (width, height) => {
+	// TODO parameterize width and height as extra arguments in transform function (when available in data-randomizer dependency)
 	return r.object({
-		id: exports.id,
-		cat: exports.imageCategory,
-	}).transform(x => `https://placeimg.com/${width}/${height}/${x.cat}?id=${x.id}`);
+		id: r.integer(1, 1e9),
+		cat: r.choice(IMAGE_CATEGORIES),
+	}).transform(x => `https://placeimg.com/${width}/${height}/${x.cat}?id=${x.id}`).generator();
 };
-
-exports.bannerImageUrl = exports.imageUrl(800, 200);
-
-exports.featureImageUrl = exports.imageUrl(320, 240);
-
-function ucfirst(string) {
-	if (string.length > 0) {
-		string = string[0].toUpperCase() + string.substring(1);
-	}
-	return string;
-}
-
-function ucfirstAll(string) {
-	return string.split(/ /).map(ucfirst).join(' ');
-}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/styles/main.css"/>
+</head>
+<body>
+<h1>Test</h1>
+
+{{>header}}
+
+<main>
+
+    <h2>ucfirst test</h2>
+
+    {{#ucfirst}}abc def{{/ucfirst}}
+
+    <h2>titlecase test</h2>
+
+    {{#titlecase}}abc def{{/titlecase}}
+
+</main>
+
+{{>footer}}
+
+</body>
+</html>

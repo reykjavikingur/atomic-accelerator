@@ -2,34 +2,38 @@
 <html>
 <head>
     <title>{{title}}</title>
-    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/main.css"/>
 </head>
 <body>
 <h1>{{title}}</h1>
 
 {{>header}}
 
-{{#repeat 2}}
-    <p>{{random.paragraph}}</p>
-{{/repeat}}
+<main>
 
-<img src="{{random.bannerImageUrl}}"/>
-
-<h2>{{random.title}}</h2>
-
-<ul class="cards">
-    {{#repeat 3}}
-        <li>{{>feature-card}}</li>
+    {{#repeat 2}}
+        <p>{{random.paragraph}}</p>
     {{/repeat}}
-</ul>
 
-<h2>{{random.title}}</h2>
+    <img src="{{random.imageUrl 800 200}}"/>
 
-<ul class="cards">
-    {{#repeat 3}}
-        <li>{{random.sentence}}</li>
-    {{/repeat}}
-</ul>
+    <h2>{{#titlecase}}{{random.phrase 2 5}}{{/titlecase}}</h2>
+
+    <ul class="cards">
+        {{#repeat 3}}
+            <li>{{>feature-card}}</li>
+        {{/repeat}}
+    </ul>
+
+    <h2>{{#titlecase}}{{random.title}}{{/titlecase}}</h2>
+
+    <ul class="cards">
+        {{#repeat 3}}
+            <li>{{random.sentence}}</li>
+        {{/repeat}}
+    </ul>
+
+</main>
 
 {{>footer}}
 
